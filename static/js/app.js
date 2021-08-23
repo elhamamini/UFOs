@@ -23,3 +23,21 @@ function buildTable(data){
     });
     });
 }
+
+function handleClick(){
+    let date=d3.select("#datetime").property("value");
+    let filteredData=tableData;
+    if(date){
+        //this line will tell show only rows where the date is equal to the date filter we created above
+        filteredData=filteredData.filter(row=>row.datetime===date);
+    }
+    // now we are creating another table here wiht filter data and if event doesnt occure filter data will be original data
+    buildTable(filteredData);
+  
+   
+}
+  //our selectore string contains the id for another html tag. well assign a unique id to button elemnt in the html called "filter-btn"
+   // we are telling d3 to execute our handleClick() when the button with an is of "filter-btn" is clicked
+d3.selectAll("#filter-btn").on("click",handleClick);
+//build the table when the page loads;
+buildTable(tableData);
